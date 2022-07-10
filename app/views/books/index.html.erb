@@ -1,52 +1,71 @@
-<h1>Books</h1>
+<div class="container">
+  <h1>Books</h1>
+  
+  <table class="table-list">
+    <thead>
+      <tr>
+        <th class="table-heading">Title</th>
+        <th class="table-heading">Body</th>
+        <th class="table-heading">Show</th>
+        <th class="table-heading">Edit</th>  
+        <th class="table-heading">Destroy</th>  
+      <tr>
+    </thead>
+    <tbody>
+      <% @books.each do |book| %>
+      <tr>
+        <th class="table-text"><%= book.title %></th>
+        <th class="table-text"><%= book.body %></th>
+        <th class="table-link"><%= link_to("Show", book_path(book.id)) %></th>
+        <th class="table-link"><%= link_to("Edit", edit_book_path(book.id)) %></th>  
+        <th class="table-link"><%= link_to("Destroy", book_path(book.id), method: :delete, data: {confirm: "Are you sure?"}) %></th>
+      <tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th>Show</th>
-      <th>Edit</th>  
-      <th>Destroy</th>  
-    <tr>
-  </thead>
-  <tbody>
-<% @books.each do |book| %>
-    <tr>
-      <th><%= book.title %></th>
-      <th><%= book.body %></th>
-      <th><%= link_to("Show", book_path(book.id)) %></th>
-      <th><%= link_to("Edit", edit_book_path(book.id)) %></th>  
-      <th><%= link_to("Destroy", book_path(book.id), method: :delete, data: {confirm: "Are you sure?"}) %></th>
-    <tr>
-<% end %>
-  </tbody>
-</table>
-
-
-<h2>New book</h2>
-
-<%= form_with model: @book, url: books_path, method: :post do |f| %>
-
-<% if @book.errors.any? %>
-  <p><%= @book.errors.count %> error prohibited this book from being saved:</p>
-    <ul>
-      <% @book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+<div class="container">
+  <h2>New book</h2>
+  
+  <%= form_with model: @book, url: books_path, method: :post do |f| %>
+  
+  <% if @book.errors.any? %>
+    <table class="table-errors">
+      <thead>
+        <tr>
+          <th class="table-errors-heading">
+            <%= @book.errors.count %> error prohibited this book from being saved:
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th class="table-errors-text">
+            <ul>
+              <% @book.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+              <% end %>
+            </ul>
+          </th>
+        </tr>
+      </tbody>
+    </table>
   <% end %>
-    </ul>
-<% end %>
-
-<h3>Title</h3>
-
-<%= f.text_field :title %>
-
-<h3>Body</h3>
-
-<%= f.text_area :body %>
-
-<br>
-
-<%= f.submit 'Create Book' %>
-
-<% end %>
+  
+  <div class="field">
+    <label for="book_title">Title</label>
+    <%= f.text_field :title %>
+  </div>
+  
+  <div class="field">
+    <label for="book_body">Body</label>
+    <%= f.text_area :body %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit 'Create Book' %>
+  </div>
+  
+  <% end %>
+</div>
