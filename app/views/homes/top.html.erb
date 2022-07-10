@@ -1,19 +1,7 @@
+<h1>ようこそ <strong>Bookers</strong> へ！</h1>
 
+<p>Bookers では、さまざまな書籍に関するあなたの意見や</p>
 
-<h2>New book</h2>
+<p>印象を共有し交換することができます</p>
 
-<%= form_with model: @book, url: '/books/create', method: :post do |f| %>
-
-<h3>Title</h3>
-
-<%= f.text_field :title %>
-
-<h3>Body</h3>
-
-<%= f.text_area :body %>
-
-<br>
-
-<%= f.submit 'Create Book' %>
-
-<% end %>
+<p><a href="/books">start</a></p>  
